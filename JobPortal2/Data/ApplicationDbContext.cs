@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using JobPortal2.Models.DBObjects;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace JobPortal2.Data
 {
-    public partial class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext()
         {
@@ -40,6 +41,7 @@ namespace JobPortal2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Application>(entity =>
             {
                 entity.HasKey(e => e.IdApplication)

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using JobPortal2.Models;
 using JobPortal2.Models.DBObjects;
+using System.Net.WebSockets;
 
 namespace JobPortal2.Controllers
 {
@@ -22,9 +23,10 @@ namespace JobPortal2.Controllers
         }
 
         // GET: CandidateController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var model = candidateRepository.GetCandidateId(id);
+            return View("CandidateDetails", model);
         }
 
         // GET: CandidateController/Create
@@ -55,44 +57,59 @@ namespace JobPortal2.Controllers
             }
         }
         // GET: CandidateController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = candidateRepository.GetCandidateId(id);
+            return View("EditCandidate", model);
         }
 
         // POST: CandidateController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new CandidateModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    candidateRepository.UpdateCandidate(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", id);
+                }
+                
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", id);
             }
         }
 
         // GET: CandidateController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = candidateRepository.GetCandidateId(id);
+            return View("DeleteCandidate", model);
         }
 
         // POST: CandidateController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                candidateRepository.DeleteCandidate(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteCandidate", id);
             }
         }
     }
