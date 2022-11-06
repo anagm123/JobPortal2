@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using JobPortal2.Models;
 using JobPortal2.Models.DBObjects;
 using System.Net.WebSockets;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace JobPortal2.Controllers
 {
+    [Authorize(Roles = "Candidate")]
     public class CandidateController : Controller
     {
         private CandidateRepository candidateRepository;
@@ -23,6 +26,7 @@ namespace JobPortal2.Controllers
         }
 
         // GET: CandidateController/Details/5
+        [Authorize(Roles = "Candidate, Recruiter")]
         public ActionResult Details(Guid id)
         {
             var model = candidateRepository.GetCandidateId(id);
@@ -57,6 +61,7 @@ namespace JobPortal2.Controllers
             }
         }
         // GET: CandidateController/Edit/5
+        [Authorize(Roles = "Candidate")]
         public ActionResult Edit(Guid id)
         {
             var model = candidateRepository.GetCandidateId(id);
@@ -91,6 +96,7 @@ namespace JobPortal2.Controllers
         }
 
         // GET: CandidateController/Delete/5
+        [Authorize(Roles = "Candidate")]
         public ActionResult Delete(Guid id)
         {
             var model = candidateRepository.GetCandidateId(id);
