@@ -24,7 +24,7 @@ namespace JobPortal2.Repository
                 model.CompanyName = dbobject.CompanyName;
                 model.Location = dbobject.Location;
                 model.ContactNumber = dbobject.ContactNumber;
-
+                model.EmailAddress= dbobject.EmailAddress;
             }
             return model;
         }
@@ -37,6 +37,7 @@ namespace JobPortal2.Repository
                 dbobject.CompanyName = model.CompanyName;
                 dbobject.Location = model.Location;
                 dbobject.ContactNumber = model.ContactNumber;
+                dbobject.EmailAddress = model.EmailAddress;
 
             }
             return dbobject;
@@ -69,6 +70,7 @@ namespace JobPortal2.Repository
                 dbobject.CompanyName = model.CompanyName;
                 dbobject.Location = model.Location;
                 dbobject.ContactNumber = model.ContactNumber;
+                dbobject.EmailAddress = model.EmailAddress;
 
                 _DBContext.SaveChanges();
 
@@ -82,6 +84,11 @@ namespace JobPortal2.Repository
                 _DBContext.Recruiters.Remove(dbobject);
                 _DBContext.SaveChanges();
             }
+        }
+        public RecruiterModel GetRecruiterEmail(string email)
+        {
+            return MapDBObjectToModel(_DBContext.Recruiters.FirstOrDefault(x => x.EmailAddress == email));
+
         }
     }
 }

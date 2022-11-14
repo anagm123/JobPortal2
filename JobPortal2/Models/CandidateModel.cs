@@ -11,6 +11,8 @@ namespace JobPortal2.Models
         public string? Experience { get; set; }
         public string PhoneNumber { get; set; } = null!;
         public string Location { get; set; } = null;
+        public string EmailAddress { get; set; } = null!;
+
 
     }
 }

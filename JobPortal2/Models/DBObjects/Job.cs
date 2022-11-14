@@ -8,6 +8,7 @@ namespace JobPortal2.Models.DBObjects
         public Job()
         {
             Applications = new HashSet<Application>();
+            Saveds = new HashSet<Saved>();
         }
 
         public Guid IdJob { get; set; }
@@ -16,7 +17,8 @@ namespace JobPortal2.Models.DBObjects
         public Guid IdRecruiter { get; set; }
         public DateTime DateTimeAdded { get; set; }
 
-        public virtual Recruiter IdRecruiterNavigation { get; set; } = null!;
+        public virtual Recruiter? IdRecruiterNavigation { get; set; }
         public virtual ICollection<Application> Applications { get; set; }
+        public virtual ICollection<Saved> Saveds { get; set; }
     }
 }

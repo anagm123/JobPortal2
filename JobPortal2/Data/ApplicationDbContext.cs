@@ -19,12 +19,12 @@ namespace JobPortal2.Data
         }
 
         public virtual DbSet<Application> Applications { get; set; } = null!;
-        /*public virtual DbSet<AspNetRole> AspNetRoles { get; set; } = null!;
-        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; } = null!;
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; } = null!;
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
-        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;*/
+        //public virtual DbSet<AspNetRole> AspNetRoles { get; set; } = null!;
+        //public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; } = null!;
+        //public virtual DbSet<AspNetUser> AspNetUsers { get; set; } = null!;
+        //public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
+        //public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
+        //public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Candidate> Candidates { get; set; } = null!;
         public virtual DbSet<Job> Jobs { get; set; } = null!;
         public virtual DbSet<Recruiter> Recruiters { get; set; } = null!;
@@ -41,7 +41,6 @@ namespace JobPortal2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Application>(entity =>
             {
                 entity.HasKey(e => e.IdApplication)
@@ -66,103 +65,108 @@ namespace JobPortal2.Data
                     .HasConstraintName("FK_Application_Job");
             });
 
-            /*modelBuilder.Entity<AspNetRole>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedName] IS NOT NULL)");
+            //modelBuilder.Entity<AspNetRole>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+            //        .IsUnique()
+            //        .HasFilter("([NormalizedName] IS NOT NULL)");
 
-                entity.Property(e => e.Name).HasMaxLength(256);
+            //    entity.Property(e => e.Name).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedName).HasMaxLength(256);
-            });
+            //    entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            //});
 
-            modelBuilder.Entity<AspNetRoleClaim>(entity =>
-            {
-                entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
+            //modelBuilder.Entity<AspNetRoleClaim>(entity =>
+            //{
+            //    entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetRoleClaims)
-                    .HasForeignKey(d => d.RoleId);
-            });
+            //    entity.HasOne(d => d.Role)
+            //        .WithMany(p => p.AspNetRoleClaims)
+            //        .HasForeignKey(d => d.RoleId);
+            //});
 
-            modelBuilder.Entity<AspNetUser>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
+            //modelBuilder.Entity<AspNetUser>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
 
-                entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+            //    entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+            //        .IsUnique()
+            //        .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
-                entity.Property(e => e.Email).HasMaxLength(256);
+            //    entity.Property(e => e.Email).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+            //    entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+            //    entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
-                entity.Property(e => e.UserName).HasMaxLength(256);
+            //    entity.Property(e => e.UserName).HasMaxLength(256);
 
-                entity.HasMany(d => d.Roles)
-                    .WithMany(p => p.Users)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "AspNetUserRole",
-                        l => l.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
-                        r => r.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
-                        j =>
-                        {
-                            j.HasKey("UserId", "RoleId");
+            //    entity.HasMany(d => d.Roles)
+            //        .WithMany(p => p.Users)
+            //        .UsingEntity<Dictionary<string, object>>(
+            //            "AspNetUserRole",
+            //            l => l.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
+            //            r => r.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
+            //            j =>
+            //            {
+            //                j.HasKey("UserId", "RoleId");
 
-                            j.ToTable("AspNetUserRoles");
+            //                j.ToTable("AspNetUserRoles");
 
-                            j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
-                        });
-            });
+            //                j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+            //            });
+            //});
 
-            modelBuilder.Entity<AspNetUserClaim>(entity =>
-            {
-                entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
+            //modelBuilder.Entity<AspNetUserClaim>(entity =>
+            //{
+            //    entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserClaims)
-                    .HasForeignKey(d => d.UserId);
-            });
+            //    entity.HasOne(d => d.User)
+            //        .WithMany(p => p.AspNetUserClaims)
+            //        .HasForeignKey(d => d.UserId);
+            //});
 
-            modelBuilder.Entity<AspNetUserLogin>(entity =>
-            {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+            //modelBuilder.Entity<AspNetUserLogin>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
 
-                entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
+            //    entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+            //    entity.Property(e => e.LoginProvider).HasMaxLength(128);
 
-                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+            //    entity.Property(e => e.ProviderKey).HasMaxLength(128);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserLogins)
-                    .HasForeignKey(d => d.UserId);
-            });
+            //    entity.HasOne(d => d.User)
+            //        .WithMany(p => p.AspNetUserLogins)
+            //        .HasForeignKey(d => d.UserId);
+            //});
 
-            modelBuilder.Entity<AspNetUserToken>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+            //modelBuilder.Entity<AspNetUserToken>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+            //    entity.Property(e => e.LoginProvider).HasMaxLength(128);
 
-                entity.Property(e => e.Name).HasMaxLength(128);
+            //    entity.Property(e => e.Name).HasMaxLength(128);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserTokens)
-                    .HasForeignKey(d => d.UserId);
-            });*/
+            //    entity.HasOne(d => d.User)
+            //        .WithMany(p => p.AspNetUserTokens)
+            //        .HasForeignKey(d => d.UserId);
+            //});
 
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Candidate>(entity =>
             {
                 entity.HasKey(e => e.IdCandidate)
-                    .HasName("PK__Candidat__D5598973B00EA55F");
+                    .HasName("PK__tmp_ms_x__D559897320EE5E4F");
 
                 entity.ToTable("Candidate");
 
                 entity.Property(e => e.IdCandidate).ValueGeneratedNever();
+
+                entity.Property(e => e.EmailAddress)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Experience)
                     .HasMaxLength(250)
@@ -207,14 +211,13 @@ namespace JobPortal2.Data
                 entity.HasOne(d => d.IdRecruiterNavigation)
                     .WithMany(p => p.Jobs)
                     .HasForeignKey(d => d.IdRecruiter)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Job_Recruiter");
             });
 
             modelBuilder.Entity<Recruiter>(entity =>
             {
                 entity.HasKey(e => e.IdRecruiter)
-                    .HasName("PK__Recruite__75EF1C7C2C9AE532");
+                    .HasName("PK__tmp_ms_x__75EF1C7C81C2F14C");
 
                 entity.ToTable("Recruiter");
 
@@ -228,6 +231,10 @@ namespace JobPortal2.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.EmailAddress)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Location)
                     .HasMaxLength(250)
                     .IsUnicode(false);
@@ -235,18 +242,20 @@ namespace JobPortal2.Data
 
             modelBuilder.Entity<Saved>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.IdSaved);
 
                 entity.ToTable("Saved");
 
+                entity.Property(e => e.IdSaved).ValueGeneratedNever();
+
                 entity.HasOne(d => d.IdCandidateNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Saveds)
                     .HasForeignKey(d => d.IdCandidate)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Saved_Candidate");
 
                 entity.HasOne(d => d.IdJobNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Saveds)
                     .HasForeignKey(d => d.IdJob)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Saved_Job");

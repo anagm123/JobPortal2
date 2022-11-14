@@ -10,6 +10,6 @@ namespace JobPortal2.Models
         [DataType(DataType.Date)]
         public DateTime DateTimeAdded { get; set; }
         public Guid IdJob { get; set; }
-        public Guid IdCandidate { get; set; }
+        public  Guid IdCandidate { get; set; }
     }
 }

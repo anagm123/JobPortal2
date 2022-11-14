@@ -27,7 +27,7 @@ namespace JobPortal2.Controllers
 
         // GET: RecruiterController/Details/5
         [Authorize(Roles = "Recruiter, Candidate")]
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
             return View();
         }
@@ -46,6 +46,11 @@ namespace JobPortal2.Controllers
             try
             {
                 var model = new RecruiterModel();
+                if (User.Identity.IsAuthenticated)
+                {
+                    var email = User.Identity.Name;
+                    model.EmailAddress = email;
+                }
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
                 if (task.Result)
@@ -62,7 +67,7 @@ namespace JobPortal2.Controllers
 
         // GET: RecruiterController/Edit/5
         [Authorize(Roles = "Recruiter")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             return View();
         }
@@ -70,7 +75,7 @@ namespace JobPortal2.Controllers
         // POST: RecruiterController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
@@ -84,7 +89,7 @@ namespace JobPortal2.Controllers
 
         // GET: RecruiterController/Delete/5
         [Authorize(Roles = "Recruiter")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             return View();
         }
@@ -92,7 +97,7 @@ namespace JobPortal2.Controllers
         // POST: RecruiterController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {

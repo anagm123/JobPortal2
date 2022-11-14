@@ -27,6 +27,7 @@ namespace JobPortal.Repository
                 model.Experience = dbobject.Experience;
                 model.PhoneNumber = dbobject.PhoneNumber;
                 model.Location = dbobject.Location;
+                model.EmailAddress=dbobject.EmailAddress;
 
             }
             return model;
@@ -43,6 +44,7 @@ namespace JobPortal.Repository
                 dbobject.Experience = model.Experience;
                 dbobject.PhoneNumber = model.PhoneNumber;
                 dbobject.Location = model.Location;
+                dbobject.EmailAddress= model.EmailAddress;
 
             }
             return dbobject;
@@ -78,6 +80,8 @@ namespace JobPortal.Repository
                 dbobject.Experience = model.Experience;
                 dbobject.PhoneNumber = model.PhoneNumber;
                 dbobject.Location = model.Location;
+                dbobject.EmailAddress = model.EmailAddress;
+
 
                 _DBContext.SaveChanges();
 
@@ -92,5 +96,11 @@ namespace JobPortal.Repository
                 _DBContext.SaveChanges();
             }
         }
+
+        public CandidateModel GetCandidatebyEmail(string email)
+        {
+            return MapDBObjectToModel(_DBContext.Candidates.FirstOrDefault(x => x.EmailAddress == email));
+        }
+
     }
 }

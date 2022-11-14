@@ -121,7 +121,7 @@ namespace JobPortal2.Areas.Identity.Pages.Account
                     var roles = await _userManager.GetRolesAsync(user);
                     if (roles.Contains("Candidate"))
                     {
-                        return RedirectToAction("Index", "Candidate");
+                        return RedirectToAction("Create", "Candidate");
                     }
                     else
                     {

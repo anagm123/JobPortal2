@@ -7,6 +7,7 @@ using JobPortal2.Models.DBObjects;
 using System.Net.WebSockets;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Security.Claims;
 
 namespace JobPortal2.Controllers
 {
@@ -47,6 +48,11 @@ namespace JobPortal2.Controllers
             try
             {
                 var model = new CandidateModel();
+                if (User.Identity.IsAuthenticated)
+                {
+                    var email = User.Identity.Name;
+                    model.EmailAddress = email;
+                }
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
                 if (task.Result)
