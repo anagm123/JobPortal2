@@ -8,6 +8,8 @@ using System.Security.Claims;
 using JobPortal2.Models.DBObjects;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace JobPortal2.Controllers
 {
@@ -80,46 +82,63 @@ namespace JobPortal2.Controllers
         }
 
         // GET: JobController/Edit/5
-        public ActionResult Edit(int id)
+        [Authorize(Roles = "Recruiter")]
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = jobRepository.GetJobId(id);
+            return View("EditJob", model);
         }
 
         // POST: JobController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new JobModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    jobRepository.UpdateJob(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", id);
+                }
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", id);
             }
         }
 
         // GET: JobController/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles = "Recruiter")]
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = jobRepository.GetJobId(id);
+            return View("DeleteJob", model);
         }
 
         // POST: JobController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                jobRepository.DeleteJob(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteJob", id);
             }
         }
+        [Authorize(Roles = "Candidate")]
         public ActionResult Save(Guid id)
         {
             if(User.Identity.IsAuthenticated)
@@ -148,6 +167,7 @@ namespace JobPortal2.Controllers
             }
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Candidate")]
         public ActionResult SavedIndex()
         {
             try

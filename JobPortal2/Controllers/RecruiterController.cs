@@ -67,9 +67,10 @@ namespace JobPortal2.Controllers
 
         // GET: RecruiterController/Edit/5
         [Authorize(Roles = "Recruiter")]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = recruiterRepository.GetRecruiterId(id);
+            return View("EditRecruiter", model);
         }
 
         // POST: RecruiterController/Edit/5
@@ -79,11 +80,22 @@ namespace JobPortal2.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new RecruiterModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    recruiterRepository.UpdateRecruiter(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index", id);
+                }
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", id);
             }
         }
 
@@ -91,7 +103,8 @@ namespace JobPortal2.Controllers
         [Authorize(Roles = "Recruiter")]
         public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = recruiterRepository.GetRecruiterId(id);
+            return View("DeleteRecruiter", model);
         }
 
         // POST: RecruiterController/Delete/5
@@ -101,11 +114,12 @@ namespace JobPortal2.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                recruiterRepository.DeleteRecruiter(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteRecruier", id);
             }
         }
     }

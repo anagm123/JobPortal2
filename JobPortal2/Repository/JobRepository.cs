@@ -60,7 +60,7 @@ namespace JobPortal2.Repository
             _DBContext.Jobs.Add(MapModelToDBObject(model));
             _DBContext.SaveChanges();
         }
-        public void UpdateRecruiter(JobModel model)
+        public void UpdateJob(JobModel model)
         {
             var dbobject = _DBContext.Jobs.FirstOrDefault(x => x.IdJob == model.IdJob);
             if (dbobject != null)
