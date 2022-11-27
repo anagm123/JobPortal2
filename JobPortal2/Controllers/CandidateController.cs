@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace JobPortal2.Controllers
 {
-    [Authorize(Roles = "Candidate")]
+    [Authorize(Roles = "Candidate, Recruiter")]
     public class CandidateController : Controller
     {
         private CandidateRepository candidateRepository;
@@ -35,6 +35,7 @@ namespace JobPortal2.Controllers
         }
 
         // GET: CandidateController/Create
+        [Authorize(Roles = "Candidate")]
         public ActionResult Create()
         {
             return View("CreateCandidate");
@@ -83,21 +84,19 @@ namespace JobPortal2.Controllers
             {
                 var model = new CandidateModel();
                 var task = TryUpdateModelAsync(model);
+                model.IdCandidate = id;
+                model.EmailAddress = User.Identity.Name;
                 task.Wait();
                 if (task.Result)
                 {
                     candidateRepository.UpdateCandidate(model);
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return RedirectToAction("Index", id);
-                }
-                
+                return RedirectToAction("Index", id);
             }
             catch
             {
-                return RedirectToAction("Index", id);
+                return RedirectToAction("Index",id);
             }
         }
 
@@ -106,7 +105,7 @@ namespace JobPortal2.Controllers
         public ActionResult Delete(Guid id)
         {
             var model = candidateRepository.GetCandidateId(id);
-            return View("DeleteCandidate", model);
+            return View("Delete", model);
         }
 
         // POST: CandidateController/Delete/5
@@ -121,7 +120,7 @@ namespace JobPortal2.Controllers
             }
             catch
             {
-                return View("DeleteCandidate", id);
+                return View("Delete", id);
             }
         }
     }

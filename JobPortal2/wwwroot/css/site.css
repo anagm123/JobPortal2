@@ -1,18 +1,22 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background-image: url('c:\users\ana\source\repos\jobportal2\jobportal2\views\images\background.png');
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+        background-image: url('c:\users\ana\source\repos\jobportal2\jobportal2\views\images\background.png');
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    background-image: url('c:\users\ana\source\repos\jobportal2\jobportal2\views\images\background.png');
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('c:\users\ana\source\repos\jobportal2\jobportal2\views\images\background.png');
 }

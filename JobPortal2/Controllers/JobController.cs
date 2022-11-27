@@ -23,12 +23,15 @@ namespace JobPortal2.Controllers
         private RecruiterRepository _recruiterRepository;
 
         private CandidateRepository _candidateRepository;
+
+        private ApplicationRepository _applicationRepository;
         public JobController(ApplicationDbContext dbContext)
         {
             jobRepository = new JobRepository(dbContext);
             _recruiterRepository = new RecruiterRepository(dbContext);
             _DbContext= dbContext;
             _candidateRepository = new CandidateRepository(dbContext);
+            _applicationRepository = new ApplicationRepository(dbContext);
         }
       
         // GET: JobController
@@ -39,9 +42,10 @@ namespace JobPortal2.Controllers
         }
 
         // GET: JobController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var model = jobRepository.GetJobId(id);
+            return View("JobDetails", model);
         }
 
         // GET: JobController/Create
@@ -96,8 +100,11 @@ namespace JobPortal2.Controllers
         {
             try
             {
+                var user = _recruiterRepository.GetRecruiterEmail(User.Identity.Name);
                 var model = new JobModel();
                 var task = TryUpdateModelAsync(model);
+                model.IdJob = id;
+                model.IdRecruiter= user.IdRecruiter;
                 task.Wait();
                 if (task.Result)
                 {
@@ -198,6 +205,59 @@ namespace JobPortal2.Controllers
                 return View("Index");
             }
             
+        }
+        public ActionResult Unsave(Guid id)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var saved = _DbContext.Saveds.ToList();
+                var candidate = _candidateRepository.GetCandidatebyEmail(User.Identity.Name);
+                foreach(Saved item in saved)
+                {
+                    if(candidate.IdCandidate == item.IdCandidate && id == item.IdJob)
+                    {
+                        _DbContext.Saveds.Remove(item);
+                        _DbContext.SaveChanges();
+                    }
+                }
+            }
+            return RedirectToAction("SavedIndex");
+        }
+        public ActionResult Apply(Guid Id)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var application = new ApplicationModel();
+                var candidate= _candidateRepository.GetCandidatebyEmail(User.Identity.Name);
+                application.IdJob = Id;
+                application.IdCandidate = candidate.IdCandidate;
+                application.DateTimeAdded = DateTime.Now;
+                _applicationRepository.InsertApplication(application);
+            }
+            return RedirectToAction("Index");
+        }
+        [Authorize(Roles = "Recruiter")]
+        public ActionResult ApplicationIndex(Guid id)
+        {
+            var indexList = new List<ApplicationModel>();
+            if (User.Identity.IsAuthenticated)
+            {
+                var job = jobRepository.GetJobId(id);
+                var recruiter = _recruiterRepository.GetRecruiterEmail(User.Identity.Name);
+                var list= _applicationRepository.GetAllApplications();
+                
+                foreach(var application in list)
+                {
+                    if(application.IdJob==id && recruiter.IdRecruiter == job.IdRecruiter)
+                    {
+                         indexList.Add(application);
+                    }
+
+                }
+
+                
+            }
+            return View(indexList);
         }
     }
 }

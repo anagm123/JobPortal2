@@ -13,18 +13,18 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IdJob)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.JobTitle)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IdRecruiter)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.DateTimeAdded)
             </th>
@@ -34,25 +34,26 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IdJob)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.JobTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IdRecruiter)
-            </td>
-            <td>
+            </td>*@
+            <td>\
                 @Html.DisplayFor(modelItem => item.DateTimeAdded)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Remove", "Unsave", new {  id=item.IdJob })
             </td>
         </tr>
 }

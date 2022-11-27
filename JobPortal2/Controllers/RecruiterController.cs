@@ -29,7 +29,8 @@ namespace JobPortal2.Controllers
         [Authorize(Roles = "Recruiter, Candidate")]
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = recruiterRepository.GetRecruiterId(id);
+            return View("RecruiterDetails", model);
         }
 
         // GET: RecruiterController/Create
@@ -82,6 +83,8 @@ namespace JobPortal2.Controllers
             {
                 var model = new RecruiterModel();
                 var task = TryUpdateModelAsync(model);
+                model.IdRecruiter = id;
+                model.EmailAddress = User.Identity.Name;
                 task.Wait();
                 if (task.Result)
                 {
@@ -104,7 +107,7 @@ namespace JobPortal2.Controllers
         public ActionResult Delete(Guid id)
         {
             var model = recruiterRepository.GetRecruiterId(id);
-            return View("DeleteRecruiter", model);
+            return View("Delete", model);
         }
 
         // POST: RecruiterController/Delete/5
@@ -119,7 +122,7 @@ namespace JobPortal2.Controllers
             }
             catch
             {
-                return View("DeleteRecruier", id);
+                return View("Delete", id);
             }
         }
     }

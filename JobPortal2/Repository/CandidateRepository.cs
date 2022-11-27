@@ -81,8 +81,6 @@ namespace JobPortal.Repository
                 dbobject.PhoneNumber = model.PhoneNumber;
                 dbobject.Location = model.Location;
                 dbobject.EmailAddress = model.EmailAddress;
-
-
                 _DBContext.SaveChanges();
 
             }

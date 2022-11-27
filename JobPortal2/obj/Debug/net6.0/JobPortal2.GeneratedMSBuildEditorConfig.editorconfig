@@ -55,8 +55,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXENyZWF0ZUNhbmRpZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Candidate/DeleteCandidate.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXERlbGV0ZUNhbmRpZGF0ZS5jc2h0bWw=
+[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Candidate/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Candidate/EditCandidate.cshtml]
@@ -75,6 +75,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Job/ApplicationIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXEFwcGxpY2F0aW9uSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Job/CreateJob.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXENyZWF0ZUpvYi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -91,6 +95,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Job/JobDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXEpvYkRldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Job/SavedIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXFNhdmVkSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -99,8 +107,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdGVyXENyZWF0ZVJlY3J1aXRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Recruiter/DeleteRecruiter.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdGVyXERlbGV0ZVJlY3J1aXRlci5jc2h0bWw=
+[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Recruiter/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdGVyXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Recruiter/EditRecruiter.cshtml]
@@ -109,6 +117,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Recruiter/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Recruiter/RecruiterDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjcnVpdGVyXFJlY3J1aXRlckRldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ana/source/repos/JobPortal2/JobPortal2/Views/Shared/Error.cshtml]

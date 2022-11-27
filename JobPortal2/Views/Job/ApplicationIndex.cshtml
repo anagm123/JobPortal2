@@ -1,0 +1,54 @@
+﻿@model IEnumerable<JobPortal2.Models.ApplicationModel>
+
+@{
+    ViewData["Title"] = "ApplicationIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ApplicationIndex</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdApplication)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdJob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCandidate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdApplication)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdJob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCandidate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

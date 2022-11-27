@@ -71,7 +71,6 @@ namespace JobPortal2.Repository
                 dbobject.Location = model.Location;
                 dbobject.ContactNumber = model.ContactNumber;
                 dbobject.EmailAddress = model.EmailAddress;
-
                 _DBContext.SaveChanges();
 
             }

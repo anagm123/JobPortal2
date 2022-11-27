@@ -70,6 +70,7 @@ namespace JobPortal2.Repository
                 dbobject.Description = model.Description;
                 dbobject.IdRecruiter = model.IdRecruiter;
                 dbobject.DateTimeAdded = model.DateTimeAdded;
+                _DBContext.SaveChanges();
 
             }
         }

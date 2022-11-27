@@ -13,9 +13,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.IdRecruiter)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CompanyName)
             </th>
@@ -31,9 +31,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IdRecruiter)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyName)
             </td>
@@ -44,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.ContactNumber)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.IdRecruiter }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.IdRecruiter }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.IdRecruiter })
             </td>
         </tr>
 }
